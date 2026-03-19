@@ -124,3 +124,6 @@ GitHub: [@viditcode](https://github.com/viditcode)
 - [ ] Auto-generate Bug ID based on count
 - [ ] Add timestamp to each bug report
 - [ ] Export to PDF format
+- [ ] Don't overwrite the previous data in the saved file
+- [ ] then make good UI based
+- [ ] Add the AI like chatgpt to summaries the bug, find there root cause, how can we fix (not in details) and some more use.
