@@ -127,3 +127,11 @@ GitHub: [@viditcode](https://github.com/viditcode)
 - [ ] Don't overwrite the previous data in the saved file
 - [ ] Add a GUI so non-technical QA testers can use it without command line
 - [ ] Integrate AI (like ChatGPT) to automatically summarise the bug, suggest possible root cause, and recommend a fix — making this a smart bug reporting assistant
+
+## Version History
+
+| Version | What Changed |
+|---|---|
+| v1.0.0 | Basic bug report — procedural code, single file |
+| v2.0.0 | Refactored to OOP — Bug class with print, txt, excel methods |
+| v3.0.0 | Coming soon — AI integration |
