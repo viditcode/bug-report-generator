@@ -125,5 +125,5 @@ GitHub: [@viditcode](https://github.com/viditcode)
 - [ ] Add timestamp to each bug report
 - [ ] Export to PDF format
 - [ ] Don't overwrite the previous data in the saved file
-- [ ] Add the GUI 
-- [ ] Add the AI like chatgpt to summaries the bug, find there root cause, how can we fix (not in details) and some more use.
+- [ ] Add a GUI so non-technical QA testers can use it without command line
+- [ ] Integrate AI (like ChatGPT) to automatically summarise the bug, suggest possible root cause, and recommend a fix — making this a smart bug reporting assistant
