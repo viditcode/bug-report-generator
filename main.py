@@ -12,36 +12,43 @@
 9 - POT file
 '''
 
-# import libraries
-import openpyxl
-from bug import Bug
+from model.bug import Bug
+from services.file_services import FileServices
+from view.report_view import ReportView
+from utils.validator import get_from_list, get_non_empty, get_valid_number
+from utils.validator import valid_priority, valid_severity
+
+
+service = FileServices()
 
 # take the value from user
-bug_count = int(input("Enter the count of Bugs: - "))
+bug_count = get_valid_number("Enter the count of Bugs: - ")
 
 # create a storage 
 all_bug = []
 
-
+starting_number = service.get_bug_number()
 # now ask user to enter the bug details bug count times.
 for bug_num in range(bug_count):
     steps =[]
     print("-"*40)
     print("Please Enter Bug number: -"+str(bug_num+1))
-    Bug_Id = input("Enter the Bug_Id: ")
-    Bug_Summary = input("Enter the Bug_Summary: ")
-    Bug_Description = input("Enter the Bug_Description:  ")
-    Severity = input("Enter the Severity:  ")
-    Priority = input("Enter the Priority:  ")
-    Environment = input("Enter the Environment:  ")
-    Bug_Label = input("Enter the Bug_Label:  ")
-    no_of_step = int(input("Enter the number of Step:  "))
+    
+    Bug_Summary = get_non_empty("Enter the Bug_Summary: ")
+    Bug_Description = get_non_empty("Enter the Bug_Description:  ")
+    Severity = get_from_list("Enter the Severity:  ", valid_severity)
+    Priority = get_from_list("Enter the Priority:  ", valid_priority)
+    Environment = get_non_empty("Enter the Environment:  ")
+    Bug_Label = get_non_empty("Enter the Bug_Label:  ")
+    no_of_step = get_valid_number("Enter the number of Step:  ")
     for step_num in range(no_of_step):
-        step_to_reproduce = input("Enter the step number: "+str(step_num+1)+" ")
+        step_to_reproduce = get_non_empty("Enter the step number: "+str(step_num+1)+" ")
         steps.append(step_to_reproduce)
-    bug = Bug(Bug_Id,Bug_Summary,Bug_Description, Severity,Priority, Environment, Bug_Label, steps)
+    bug = Bug(starting_number+bug_num,Bug_Summary,Bug_Description, Severity,Priority, Environment, Bug_Label, steps)
     all_bug.append(bug)
     print("-"*40)
+
+
 
 # now, after collection simple data we can display the output
 print("="*40)
@@ -49,24 +56,14 @@ print("        Bug Report")
 print("="*40)
 
 
+view = ReportView()
 
 # save the data in the text file 
-file = open("Bug_report.txt","w")
-file.write("="*40+"\n")
-file.write("        Bug Report"+"\n")
-file.write("="*40+"\n")
-    
-
-# save the data in the excel file 
-
-wb = openpyxl.Workbook()
-ws = wb.active
-ws.append(["Bug Report for project - Demo"])
-ws.append(["Bug_Id","Bug_Summary","Bug_Description","Severity","Priority", "Environment","Bug_Label", "Step_to_reproduce"])
 
 for bug in all_bug:
-    bug.print_report()
-    bug.save_to_txt(file)
-    bug.save_to_excel(ws)
-wb.save("Bug_report.xlsx")
-file.close()
+    view.print_report(bug)
+    service.save_to_txt(bug)
+    service.save_to_excel(bug)
+
+service.close()
+print("File saved successfully")
