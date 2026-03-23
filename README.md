@@ -19,7 +19,7 @@ Built as a real-world QA automation project to replace manual bug reporting.
 ## Demo
 
 ```
-Enter the count of Bugs: 2
+Enter the count of Bugs: 1
 
 ----------------------------------------
 Please Enter Bug number: -1
@@ -134,4 +134,31 @@ GitHub: [@viditcode](https://github.com/viditcode)
 |---|---|
 | v1.0.0 | Basic bug report — procedural code, single file |
 | v2.0.0 | Refactored to OOP — Bug class with print, txt, excel methods |
-| v3.0.0 | Coming soon — AI integration |
+| v3.0.0 | MVC file structure — models, views, services, utils |
+| v4.0.0 | Validation, exception handling, auto Bug ID, timestamp, no overwrite |
+
+## Project Structure
+```
+bug-report-generator/
+├── main.py                 ← Controller — runs the program
+├── models/
+│   └── bug.py             ← Model — Bug class, auto ID, timestamp
+├── views/
+│   └── report_view.py     ← View — formatted report display
+├── services/
+│   └── file_service.py    ← Service — txt and Excel saving
+├── utils/
+│   └── validator.py       ← Utils — input validation
+├── requirements.txt
+└── README.md
+```
+
+## Future Improvements
+
+- [x] Auto-generate Bug ID ← done! ✅
+- [x] Add timestamp to each bug report ← done! ✅
+- [x] Prevent overwriting previous saved files ← done! ✅
+- [x] Add input validation ← done! ✅
+- [ ] Export report to PDF format
+- [ ] Add a GUI (Streamlit)
+- [ ] Integrate AI for bug summarisation and root cause
