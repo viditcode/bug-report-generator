@@ -1,7 +1,7 @@
 from datetime import datetime
 class Bug:
     def __init__(self, bug_id, summary, description, severity, priority, environment, label, steps):
-        self.bug_id = "Bug -"+str(bug_id)
+        self.bug_id = "Bug - "+str(bug_id)
         self.summary = summary
         self.description = description
         self.severity = severity
