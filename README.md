@@ -73,11 +73,13 @@ cd bug-report-generator
 **2. Install dependency**
 ```bash
 pip install openpyxl
+pip install pandas
+pip install steamlit
 ```
 
 **3. Run the tool**
 ```bash
-python Bug_Report_Generator.py
+streamlet rum app.py 
 ```
 
 ---
