@@ -136,11 +136,13 @@ GitHub: [@viditcode](https://github.com/viditcode)
 | v2.0.0 | Refactored to OOP — Bug class with print, txt, excel methods |
 | v3.0.0 | MVC file structure — models, views, services, utils |
 | v4.0.0 | Validation, exception handling, auto Bug ID, timestamp, no overwrite |
+| v5.0.0 | Add the UI with stream lit package|
 
 ## Project Structure
 ```
 bug-report-generator/
 ├── main.py                 ← Controller — runs the program
+├── app.py
 ├── models/
 │   └── bug.py             ← Model — Bug class, auto ID, timestamp
 ├── views/
@@ -159,6 +161,5 @@ bug-report-generator/
 - [x] Add timestamp to each bug report ← done! ✅
 - [x] Prevent overwriting previous saved files ← done! ✅
 - [x] Add input validation ← done! ✅
-- [ ] Export report to PDF format
-- [ ] Add a GUI (Streamlit)
+- [x] Add a GUI (Streamlit)
 - [ ] Integrate AI for bug summarisation and root cause
