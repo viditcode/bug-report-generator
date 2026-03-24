@@ -79,7 +79,7 @@ pip install steamlit
 
 **3. Run the tool**
 ```bash
-streamlet rum app.py 
+streamlit rum app.py 
 ```
 
 ---
