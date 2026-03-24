@@ -8,8 +8,7 @@ from utils.validator import valid_priority, valid_severity
 
 
 page = st.sidebar.radio("Bug Report Generator", ["Report a Bug", "View Bug Report", "Summary"])
-st.sidebar.write("v5
-.0.0")
+st.sidebar.write("v5.0.0")
 
 if page == "Report a Bug":
     st.title("Report a Bug")
