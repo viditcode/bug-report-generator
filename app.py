@@ -3,12 +3,13 @@ import os
 import pandas as pd
 from model.bug import Bug
 from services.file_services import FileServices
+from services.ai_services import AIService
 from view.report_view import ReportView
 from utils.validator import valid_priority, valid_severity  
 
 
-page = st.sidebar.radio("Bug Report Generator", ["Report a Bug", "View Bug Report", "Summary"])
-st.sidebar.write("v5.0.0")
+page = st.sidebar.radio("Bug Report Generator", ["Report a Bug", "View Bug Report", "Summary", "AI Analysis"])
+st.sidebar.write("v6.0.0")
 
 if page == "Report a Bug":
     st.title("Report a Bug")
@@ -45,6 +46,16 @@ if page == "Report a Bug":
             service.save_to_excel(bug)
             service.close()
             st.success(f"Bug {bug.bug_id} report submitted successfully!")
+
+            # AI Analysis
+            with st.spinner("Analyzing the bug report with AI..."):
+                try:                         
+                    ai = AIService()
+                    analysis = ai.analysis_bug(bug)
+                    st.subheader("AI Analysis of the Bug")
+                    st.markdown(analysis)
+                except Exception as e:
+                    st.error(f"An error occurred during AI analysis: {str(e)}")
 elif page == "View Bug Report":
     st.title("View Bug Report")
     if os.path.exists("Bug_report.xlsx"):
@@ -100,6 +111,50 @@ elif page == "Summary":
             with col2:
                 with open ("Bug_report.xlsx", "rb") as excel_file:
                     st.download_button("Download Excel Report", excel_file, file_name="Bug_report.xlsx")
+        else:
+            st.info("No bug reports found. Please submit a bug first.")
+    else:
+        st.info("No bug reports found. Please submit a bug first.")
+
+elif page == "AI Analysis":
+    st.title("AI Analysis ")
+    st.write("Select the bug to get AI analysis")
+
+    if os.path.exists("Bug_report.xlsx"):
+        df = pd.read_excel("Bug_report.xlsx")
+
+        if len(df)>0:
+            selected_bug_id = st.selectbox("Select Bug ID ", df["Bug_Id"].tolist())
+            bug_row = df[df['Bug_Id'] == selected_bug_id].iloc[0]
+
+            # show basic details
+
+            st.write(f"**Summary:** {bug_row['Bug_Summary']}")
+            st.write(f"**Description:** {bug_row['Bug_Description']}")
+            st.write(f"**Severity:** {bug_row['Severity']}")
+            st.write(f"**Priority:** {bug_row['Priority']}") 
+            st.write(f"**Environment:** {bug_row['Environment']}")
+
+            # analysis button
+            if st.button("Analyze"):
+                with st.spinner("Analyzing the bug report with AI..."):
+                    try:
+                        bug = Bug(
+                            bug_row['Bug_Id'],
+                            bug_row['Bug_Summary'],
+                            bug_row['Bug_Description'],
+                            bug_row['Severity'],
+                            bug_row['Priority'],
+                            bug_row['Environment'],
+                            bug_row['Bug_Label'],
+                            bug_row['Step_to_reproduce'].split(",")
+                        )
+                        ai = AIService()
+                        analysis = ai.analysis_bug(bug)
+                        st.subheader("AI Analysis of the Bug") 
+                        st.markdown(analysis)
+                    except Exception as e:     
+                        st.error(f"An error occurred during AI analysis: {str(e)}")
         else:
             st.info("No bug reports found. Please submit a bug first.")
     else:
