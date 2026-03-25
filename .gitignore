@@ -1,6 +1,6 @@
 *.xlsx
-*.txt
-~$*
+Bug_report.txt 
+notes.txt
 __pycache__/
 *.pyc
 .env

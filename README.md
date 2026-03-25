@@ -5,7 +5,7 @@ An AI-powered bug report generator built with Python and Streamlit. QA engineers
 ---
 
 ## Live Demo
-🚀 Coming soon on Streamlit Cloud
+🚀 [Use App](https://bug-report-generator.streamlit.app/)
 
 ---
 
